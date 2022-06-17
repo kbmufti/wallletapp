@@ -40,7 +40,7 @@ class Cards extends StatelessWidget {
               Icon(
                 Icons.paypal_outlined,
                 size: 40,
-                color: Colors.green,
+                color: Colors.white,
               )
             ],
           ),
