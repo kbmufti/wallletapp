@@ -24,8 +24,7 @@ class Cards extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: 300,
-      height: 200,
-      padding: EdgeInsets.all(24),
+      padding: EdgeInsets.all(20),
       decoration:
           BoxDecoration(color: color, borderRadius: BorderRadius.circular(18)),
       child: Column(
@@ -36,7 +35,7 @@ class Cards extends StatelessWidget {
             style: TextStyle(fontSize: 20, color: Colors.white),
           ),
           SizedBox(
-            height: 14,
+            height: 12,
           ),
           Text(
             '\$' + balance.toString(),
@@ -44,7 +43,7 @@ class Cards extends StatelessWidget {
                 fontSize: 30, fontWeight: FontWeight.bold, color: Colors.white),
           ),
           SizedBox(
-            height: 40,
+            height: 30,
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,

@@ -1,7 +1,10 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_constructors_in_immutables, prefer_const_literals_to_create_immutables, avoid_unnecessary_containers
 
 import 'package:flutter/material.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:wallletapp/util/money_card.dart';
+import 'package:wallletapp/util/pay_send_icons.dart';
+import 'package:wallletapp/util/statistics.dart';
 
 class Homepage extends StatefulWidget {
   Homepage({Key? key}) : super(key: key);
@@ -16,15 +19,33 @@ class _HomepageState extends State<Homepage> {
     ['Credit', -68848.73, 8009867, 06, 09],
     ['Sent', 779938.73, 4798953, 04, 02]
   ];
+
   List<Color> colors = [
     Colors.deepPurple,
     Colors.greenAccent,
     Colors.blueAccent
   ];
+  final List statTrancTitles = [
+    ['Statistics', 'See how your finances 💹'],
+    ['Transcations', 'Your latest  Transcations 💱']
+  ];
+
+  List<IconData> icons = [
+    Icons.bar_chart_outlined,
+    Icons.currency_exchange_outlined
+  ];
+
+  List<Color> listColors = [
+    Colors.red,
+    Colors.blueAccent,
+  ];
+
+  final _controller = PageController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // my cards text & plus button
+      backgroundColor: Colors.grey.shade200,
       body: Padding(
         padding: const EdgeInsets.only(top: 25, left: 25, right: 25),
         child: Column(
@@ -33,6 +54,7 @@ class _HomepageState extends State<Homepage> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Row(
+                  // my cards text & plus button
                   children: [
                     Text('My',
                         style: TextStyle(
@@ -58,15 +80,18 @@ class _HomepageState extends State<Homepage> {
             SizedBox(
               height: 25,
             ),
-
-            Container(
-              height: 200,
+            // pageview -> my money cards, horizontal scroll
+            SizedBox(
+              height: 180,
               child: PageView.builder(
+                  controller: _controller,
                   itemCount: cardInfo.length,
                   scrollDirection: Axis.horizontal,
                   itemBuilder: (BuildContext context, int index) {
                     return Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 10),
+                      /*padding left, only after the first card */
+                      padding:
+                          EdgeInsets.symmetric(horizontal: index == 0 ? 0 : 8),
                       child: Cards(
                         balance: cardInfo[index][1],
                         cardTitle: cardInfo[index][0],
@@ -77,13 +102,63 @@ class _HomepageState extends State<Homepage> {
                       ),
                     );
                   }),
-            )
-            // pageview -> my money cards, horizontal scroll
+            ),
+
+            SizedBox(
+              height: 25,
+            ),
+            // pageview  page indicator
+            SmoothPageIndicator(
+              controller: _controller,
+              count: cardInfo.length,
+              effect: const ExpandingDotsEffect(
+                  activeDotColor: Color.fromARGB(148, 110, 66, 163)),
+            ),
+
+            SizedBox(
+              height: 25,
+            ),
+            //  pay, send & bills buttons widget
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                MyIcons(
+                    buttonText: 'Send',
+                    icon: Icons.send_to_mobile_outlined,
+                    color: Colors.greenAccent),
+                MyIcons(
+                    buttonText: 'Pay',
+                    icon: Icons.payments,
+                    color: Colors.blueAccent),
+                MyIcons(
+                    buttonText: 'Bills',
+                    icon: Icons.list_alt_rounded,
+                    color: Colors.green[700]),
+              ],
+            ),
+
+            SizedBox(
+              height: 10,
+            ),
+            SizedBox(
+              height: 230,
+              child: ListView.builder(
+                itemCount: 2,
+                itemBuilder: (BuildContext context, int index) {
+                  return Padding(
+                    padding: EdgeInsets.only(bottom: index == 1 ? 0 : 10),
+                    child: MyStatistics(
+                        icon: icons[index],
+                        subTitle: statTrancTitles[index][1],
+                        title: statTrancTitles[index][0],
+                        Color: listColors[index]),
+                  );
+                },
+              ),
+            ),
           ],
         ),
       ),
-
-      // pay, send & bills buttons
 
       // stats and transactions
     );
