@@ -30,9 +30,19 @@ class Cards extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            cardTitle,
-            style: TextStyle(fontSize: 20, color: Colors.white),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                cardTitle,
+                style: TextStyle(fontSize: 20, color: Colors.white),
+              ),
+              Icon(
+                Icons.paypal_outlined,
+                size: 40,
+                color: Colors.green,
+              )
+            ],
           ),
           SizedBox(
             height: 12,
