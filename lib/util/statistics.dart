@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, prefer_typing_uninitialized_variables
 
 import 'package:flutter/material.dart';
 
@@ -6,13 +6,13 @@ class MyStatistics extends StatelessWidget {
   final icon;
   final String title;
   final String subTitle;
-  final Color;
+  final color;
   const MyStatistics(
       {Key? key,
       required this.icon,
       required this.subTitle,
       required this.title,
-      required this.Color})
+      required this.color})
       : super(key: key);
 
   @override
@@ -22,7 +22,7 @@ class MyStatistics extends StatelessWidget {
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(16.0),
-        color: Colors.white,
+        color: Color.fromARGB(255, 255, 255, 255),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -37,7 +37,7 @@ class MyStatistics extends StatelessWidget {
                     child: Icon(
                       icon,
                       size: 40,
-                      color: Color,
+                      color: color,
                     )),
               ),
               SizedBox(

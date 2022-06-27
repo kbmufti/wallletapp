@@ -183,7 +183,7 @@ class _HomepageState extends State<Homepage> {
                         icon: icons[index],
                         subTitle: statTrancTitles[index][1],
                         title: statTrancTitles[index][0],
-                        Color: listColors[index]),
+                        color: listColors[index]),
                   );
                 },
               ),
